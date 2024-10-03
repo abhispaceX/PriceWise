@@ -11,6 +11,8 @@ export async function scrapeAmazonProduct(url:string) {
         try{
             
             const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://price-wise-iuteao0sv-abhis-projects-f0c95cf5.vercel.app/';
+            console.log('Base URL:', process.env.NEXT_PUBLIC_BASE_URL);
+            console.log(baseUrl)
             const response = await axios.get(`${baseUrl}/api/proxy`, {
               params: { url: url },
             });
