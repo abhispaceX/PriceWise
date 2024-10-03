@@ -5,10 +5,17 @@ import { scrapeAmazonProduct } from '@/lib/scraper';
 import { getAveragePrice, getEmailNotifType, getHighestPrice, getLowestPrice } from "@/lib/utils/extractPrice";
 import { NextResponse } from "next/server";
 
+import { ConnectTODB } from "@/lib/mongoose";
 
-export async function Get() {
+export const maxDuration = 300; // This function can run for a maximum of 300 seconds
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+
+export async function GET(request: Request) {
 
     try{
+      ConnectTODB();
     const products= await Product.find({})
     if (!products) throw new Error('no product found')
 
@@ -67,4 +74,8 @@ export async function Get() {
     console.log(error)
 
 }
+}
+
+function connectToDB() {
+  throw new Error("Function not implemented.");
 }
