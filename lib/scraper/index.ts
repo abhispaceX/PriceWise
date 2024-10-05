@@ -16,7 +16,7 @@ export async function scrapeAmazonProduct(url:string) {
             const response = await axios.get(`${baseUrl}/api/proxy`, {
               params: { url: url },
             });
-             // Log the entire response data for debugging
+            
     
             const $ = Cheerio.load(response.data);
             const title = $('#productTitle').text().trim();
@@ -27,7 +27,6 @@ export async function scrapeAmazonProduct(url:string) {
                 $('a.price.a-text-price'),
             )
             const originalprice= await extractPrice(
-            $('#priceblock_ourprice'),
             $('.a-price.a-text-price span.a-offscreen'),
             $('#listPrice'),
             $('#priceblock_dealprice'),
